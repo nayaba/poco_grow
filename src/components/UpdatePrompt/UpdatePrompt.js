@@ -47,14 +47,16 @@ const UpdatePrompt = props => {
 
   return (
     <Fragment>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Change your prompt</label>
-        <input
-          placeholder={prompt.content}
-          {...register('prompt', { required: true })} />
-        {errors.prompt && <p>Prompt is required</p>}
-        <input type="submit" />
-      </form>
+      <div className="mt-3">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label>Change your prompt</label>
+          <input
+            placeholder={prompt.content}
+            {...register('prompt', { required: true })} />
+          {errors.prompt && <p>Prompt is required</p>}
+          <input type="submit" />
+        </form>
+      </div>
     </Fragment>
   )
 }
