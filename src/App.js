@@ -10,6 +10,10 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
+import IndexPrompts from './components/IndexPrompts/IndexPrompts'
+import ShowPrompt from './components/ShowPrompt/ShowPrompt'
+import UpdatePrompt from './components/UpdatePrompt/UpdatePrompt'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -59,6 +63,17 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
+
+          <Route exact path='/prompts' render={() => (
+            <IndexPrompts msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route exact path='/prompts/:id' render={() => (
+            <ShowPrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route exact path='/prompts/:id/edit' render={() => (
+            <UpdatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />

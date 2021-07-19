@@ -72,7 +72,7 @@ class SignUp extends Component {
                 name="password"
                 value={password}
                 type="password"
-                placeholder="Password"
+                placeholder="Must be at least 5 characters long"
                 onChange={this.handleChange}
               />
             </Form.Group>
