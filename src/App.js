@@ -57,34 +57,37 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
-        <main className="container">
-          <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
-          <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
+        <div className="bg">
+          <main className="container">
+            <Route path='/sign-up' render={() => (
+              <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
+            <Route path='/sign-in' render={() => (
+              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
 
-          <Route exact path='/prompt' render={() => (
-            <IndexPrompts msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
-          <Route exact path='/prompt/:id' render={() => (
-            <ShowPrompt msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
-          <Route exact path='/prompt/:id/edit' render={() => (
-            <UpdatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
-          <Route exact path='/create-prompt' render={() => (
-            <CreatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
-          )} />
+            <Route exact path='/prompt' render={() => (
+              <IndexPrompts msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
+            <Route exact path='/prompt/:id' render={() => (
+              <ShowPrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
+            <AuthenticatedRoute exact path='/prompt/:id/edit' render={() => (
+              <UpdatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
+            <Route exact path='/create-prompt' render={() => (
+              <CreatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+            )} />
 
-          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
-          )} />
-        </main>
+            <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+              <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+            )} />
+            <AuthenticatedRoute user={user} path='/change-password' render={() => (
+              <ChangePassword msgAlert={this.msgAlert} user={user} />
+            )} />
+          </main>
+          <h3>Welcome to Poco Grow</h3>
+        </div>
       </Fragment>
     )
   }
