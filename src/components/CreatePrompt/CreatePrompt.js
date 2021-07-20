@@ -6,7 +6,8 @@ import apiUrl from '../../apiConfig'
 
 const CreatePrompt = props => {
   const [prompt, setPrompt] = useState([])
-  const [created, setCreated] = useState(false)
+  const [createdId, setCreatedId] = useState('')
+  // let createdId
 
   const {
     register,
@@ -21,7 +22,7 @@ const CreatePrompt = props => {
         console.log('res in CreatePrompt: ', res)
       })
       .catch(console.error)
-    return (prompt, created, setCreated)
+    return (prompt, setCreatedId)
   }, [])
 
   const onSubmit = (data, user) => {
@@ -35,17 +36,13 @@ const CreatePrompt = props => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => {
-        setCreated(true)
-        console.log('prompt after axios: ', prompt)
-        console.log('setUpdated after axios: ', setCreated)
-      })
+      .then(res => setCreatedId(res.data.id))
       .catch(console.error)
   }
 
-  if (created) {
-    const { match } = props
-    return <Redirect to={`/prompts/${match.params.id}`} />
+  if (createdId) {
+    // const { match } = props
+    return <Redirect to={`/prompt/${createdId}`} />
   }
 
   return (
