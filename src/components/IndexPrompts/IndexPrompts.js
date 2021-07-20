@@ -15,7 +15,7 @@ function IndexPrompts (props) {
 
   const promptLinks = prompts.map(prompt => (
     <li key={prompt.id}>
-      <Link to={`/prompts/${prompt.id}`}>{prompt.content}</Link>
+      <Link to={`/prompt/${prompt.id}`}>{prompt.content}</Link>
     </li>
   ))
 

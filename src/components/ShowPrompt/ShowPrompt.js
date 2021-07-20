@@ -34,17 +34,17 @@ const ShowPrompt = (props) => {
 
   // { pathname: '/prompts', state: { msg: 'Prompt successfully deleted!' } }
   if (deleted) {
-    return <Redirect to='/prompts'/>
+    return <Redirect to='/prompt'/>
   }
 
   return (
     <Fragment>
       <p>{prompt.content}</p>
       <button onClick={destroy}>Delete Prompt</button>
-      <Link to={`/prompts/${props.match.params.id}/edit`}>
+      <Link to={`/prompt/${props.match.params.id}/edit`}>
         <button>Edit</button>
       </Link>
-      <Link to ="/prompts">Back to all prompts</Link>
+      <Link to ="/prompt">Back to all prompts</Link>
     </Fragment>
   )
 }

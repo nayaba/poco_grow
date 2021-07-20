@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const UpdatePrompt = props => {
+const CreatePrompt = props => {
   const [prompt, setPrompt] = useState([])
-  const [updated, setUpdated] = useState(false)
+  const [created, setCreated] = useState(false)
 
   const {
     register,
@@ -15,48 +15,46 @@ const UpdatePrompt = props => {
   } = useForm()
 
   useEffect(() => {
-    const { match } = props
-    axios(`${apiUrl}/prompt/${match.params.id}/`)
+    axios(`${apiUrl}/prompt/`)
       .then(res => {
         setPrompt(res.data.prompt)
-        console.log('res in UpdatePrompt: ', res)
+        console.log('res in CreatePrompt: ', res)
       })
       .catch(console.error)
-    return (prompt, updated, setUpdated)
+    return (prompt, created, setCreated)
   }, [])
 
   const onSubmit = (data, user) => {
     event.preventDefault()
     console.log('onSubmit data: ', data)
-    const { match } = props
     axios({
-      url: `${apiUrl}/prompt/${match.params.id}/`,
-      method: 'PATCH',
+      url: `${apiUrl}/prompt/`,
+      method: 'POST',
       data: data,
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then(() => {
-        setUpdated(true)
+        setCreated(true)
         console.log('prompt after axios: ', prompt)
-        console.log('setUpdated after axios: ', setUpdated)
+        console.log('setUpdated after axios: ', setCreated)
       })
       .catch(console.error)
   }
 
-  if (updated) {
+  if (created) {
     const { match } = props
-    return <Redirect to={`/prompt/${match.params.id}`} />
+    return <Redirect to={`/prompts/${match.params.id}`} />
   }
 
   return (
     <Fragment>
       <div className="mt-3">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Change your prompt</label>
+          <label>Create a prompt</label>
           <input
-            placeholder={prompt.content}
+            placeholder='badass prompt goes here'
             {...register('prompt.content', { required: true })} />
           {errors.prompt && <p>Prompt is required</p>}
           <input type="submit" />
@@ -66,19 +64,4 @@ const UpdatePrompt = props => {
   )
 }
 
-export default withRouter(UpdatePrompt)
-
-// <Link to={cancelPath}>
-//   <button>Cancel</button>
-// </Link>
-
-// <form onSubmit={handleSubmit(onSubmit)}>
-//   <label>Change your prompt</label>
-//   <input
-//     type="text"
-//     placeholder={prompt.content}
-//     name="prompt"
-//     ref={register}
-//   />
-//   <input type="submit" />
-// </form>
+export default withRouter(CreatePrompt)

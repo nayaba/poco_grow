@@ -13,6 +13,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 import IndexPrompts from './components/IndexPrompts/IndexPrompts'
 import ShowPrompt from './components/ShowPrompt/ShowPrompt'
 import UpdatePrompt from './components/UpdatePrompt/UpdatePrompt'
+import CreatePrompt from './components/CreatePrompt/CreatePrompt'
 
 class App extends Component {
   constructor (props) {
@@ -64,14 +65,17 @@ class App extends Component {
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
 
-          <Route exact path='/prompts' render={() => (
+          <Route exact path='/prompt' render={() => (
             <IndexPrompts msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route exact path='/prompts/:id' render={() => (
+          <Route exact path='/prompt/:id' render={() => (
             <ShowPrompt msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route exact path='/prompts/:id/edit' render={() => (
+          <Route exact path='/prompt/:id/edit' render={() => (
             <UpdatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route exact path='/create-prompt' render={() => (
+            <CreatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
 
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
