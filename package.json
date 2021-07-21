@@ -1,6 +1,6 @@
 {
   "name": "poco_grow",
-  "homepage": "https://nayaba.github.io/poco_grow_client",
+  "homepage": "https://nayaba.github.io/poco_grow",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
