@@ -21,8 +21,8 @@ function IndexPrompts (props) {
 
   return (
     <div>
-      <h3>Prompts</h3>
-      <Link to='/create-prompt/'>Create your own prompt</Link>
+      <h3 className="mt-3">Prompts</h3>
+      <Link to='/create-prompt/'>Create your own prompt!</Link>
       <ul>
         {promptLinks}
       </ul>

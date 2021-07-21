@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { Link, Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import SolidButton from '../shared/SolidButton'
+import OutlineButton from '../shared/OutlineButton'
 
 const ShowPrompt = (props) => {
   const [prompt, setPrompt] = useState([])
@@ -39,14 +41,38 @@ const ShowPrompt = (props) => {
 
   return (
     <Fragment>
-      <p>{prompt.content}</p>
-      <button onClick={destroy}>Delete Prompt</button>
-      <Link to={`/prompt/${props.match.params.id}/edit`}>
-        <button>Edit</button>
-      </Link>
-      <Link to ="/prompt">Back to all prompts</Link>
+      <div className="d-flex justify-content-center row">
+        <div className="display-4 title d-flex justify-content-center mt-3 col-12">
+          <div className="mt-3 d-flex justify-content-center mt-3 col-12">
+            <p>{prompt.content}</p>
+          </div>
+        </div>
+        <SolidButton
+          secondaryColor='White'
+          onClick={destroy}
+        >Delete Prompt</SolidButton>
+        <Link to={`/prompt/${props.match.params.id}/edit`}>
+          <OutlineButton
+            primaryColor='#ffafcc'
+            secondaryColor='White'
+            className="ml-1"
+          >Edit</OutlineButton>
+        </Link>
+        <div className="mt-3 d-flex justify-content-center mt-3 col-12">
+          <Link to ="/prompt">Back to all prompts</Link>
+        </div>
+      </div>
     </Fragment>
   )
 }
 
 export default withRouter(ShowPrompt)
+
+// <Fragment>
+//   <p>{prompt.content}</p>
+//   <button onClick={destroy}>Delete Prompt</button>
+//   <Link to={`/prompt/${props.match.params.id}/edit`}>
+//     <button>Edit</button>
+//   </Link>
+//   <Link to ="/prompt">Back to all prompts</Link>
+// </Fragment>

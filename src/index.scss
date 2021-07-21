@@ -1,5 +1,12 @@
+$theme-colors: (
+  "primary": #ffc8dd,
+  "secondary": #cdb4db,
+  "danger": #ff4136
+);
+@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
 @import '~bootstrap/scss/bootstrap';
 
-.bg {
-    background-image: url("/pink_bg.jpeg");
+.title {
+  font-family: 'Reenie Beanie', sans-serif;
+  color: #ffafcc;
 }

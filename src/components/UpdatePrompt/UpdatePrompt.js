@@ -3,10 +3,16 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import SolidButton from '../shared/SolidButton'
 
 const UpdatePrompt = props => {
   const [prompt, setPrompt] = useState([])
   const [updated, setUpdated] = useState(false)
+
+  const styles = {
+    fontSize: '1em',
+    color: 'White'
+  }
 
   const {
     register,
@@ -52,14 +58,16 @@ const UpdatePrompt = props => {
 
   return (
     <Fragment>
-      <div className="mt-3">
+      <div className="d-flex justify-content-center mt-3 col-12 font-weight-bold">
+      Change your prompt:
+      </div>
+      <div className="mt-3 d-flex justify-content-center mt-3 col-12">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Change your prompt</label>
           <input
             placeholder={prompt.content}
             {...register('prompt.content', { required: true })} />
           {errors.prompt && <p>Prompt is required</p>}
-          <input type="submit" />
+          <SolidButton type="submit" style={styles} className="ml-1">Submit</SolidButton>
         </form>
       </div>
     </Fragment>
@@ -67,18 +75,3 @@ const UpdatePrompt = props => {
 }
 
 export default withRouter(UpdatePrompt)
-
-// <Link to={cancelPath}>
-//   <button>Cancel</button>
-// </Link>
-
-// <form onSubmit={handleSubmit(onSubmit)}>
-//   <label>Change your prompt</label>
-//   <input
-//     type="text"
-//     placeholder={prompt.content}
-//     name="prompt"
-//     ref={register}
-//   />
-//   <input type="submit" />
-// </form>
