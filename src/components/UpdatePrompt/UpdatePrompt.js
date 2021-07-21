@@ -1,24 +1,17 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import SolidButton from '../shared/SolidButton'
+// import SolidButton from '../shared/SolidButton'
 
 const UpdatePrompt = props => {
-  const [prompt, setPrompt] = useState([])
+  const [prompt, setPrompt] = useState({ content: '' })
   const [updated, setUpdated] = useState(false)
 
-  const styles = {
-    fontSize: '1em',
-    color: 'White'
-  }
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm()
+  // const styles = {
+  //   fontSize: '1em',
+  //   color: 'White'
+  // }
 
   useEffect(() => {
     const { match } = props
@@ -31,14 +24,24 @@ const UpdatePrompt = props => {
     return (prompt, updated, setUpdated)
   }, [])
 
-  const onSubmit = (data, user) => {
+  const handleChange = event => {
+    event.persist()
+
+    setPrompt(prevPrompt => {
+      console.log(prevPrompt)
+      const updatedField = { [event.target.name]: event.target.value }
+      const editedPrompt = Object.assign({}, prevPrompt, updatedField)
+      return editedPrompt
+    })
+  }
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('onSubmit data: ', data)
     const { match } = props
     axios({
       url: `${apiUrl}/prompt/${match.params.id}/`,
       method: 'PATCH',
-      data: data,
+      data: { prompt },
       headers: {
         'Content-Type': 'application/json'
       }
@@ -59,15 +62,15 @@ const UpdatePrompt = props => {
   return (
     <Fragment>
       <div className="d-flex justify-content-center mt-3 col-12 font-weight-bold">
-      Change your prompt:
-      </div>
-      <div className="mt-3 d-flex justify-content-center mt-3 col-12">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit}>
+          <label>Change your prompt:</label>
           <input
-            placeholder={prompt.content}
-            {...register('prompt.content', { required: true })} />
-          {errors.prompt && <p>Prompt is required</p>}
-          <SolidButton type="submit" style={styles} className="ml-1">Submit</SolidButton>
+            placeholder="placeholder"
+            value={prompt.content}
+            name="content"
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
         </form>
       </div>
     </Fragment>
@@ -75,3 +78,14 @@ const UpdatePrompt = props => {
 }
 
 export default withRouter(UpdatePrompt)
+
+// Change your prompt:
+// </div>
+// <div className="mt-3 d-flex justify-content-center mt-3 col-12">
+//   <form onSubmit={handleSubmit(onSubmit)}>
+//     <input
+//       placeholder={prompt.content}
+//       {...register('prompt.content', { required: true })} />
+//     {errors.prompt && <p>Prompt is required</p>}
+//     <SolidButton type="submit" style={styles} className="ml-1">Submit</SolidButton>
+//   </form>

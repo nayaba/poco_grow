@@ -1,19 +1,23 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 const CreatePrompt = props => {
-  const [prompt, setPrompt] = useState([])
+  const [prompt, setPrompt] = useState({ content: '' })
   const [createdId, setCreatedId] = useState('')
   // let createdId
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm()
+  const handleChange = event => {
+    event.persist()
+
+    setPrompt(prevPrompt => {
+      console.log(prevPrompt)
+      const updatedField = { [event.target.name]: event.target.value }
+      const editedPrompt = Object.assign({}, prevPrompt, updatedField)
+      return editedPrompt
+    })
+  }
 
   useEffect(() => {
     axios(`${apiUrl}/prompt/`)
@@ -25,13 +29,12 @@ const CreatePrompt = props => {
     return (prompt, setCreatedId)
   }, [])
 
-  const onSubmit = (data, user) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('onSubmit data: ', data)
     axios({
       url: `${apiUrl}/prompt/`,
       method: 'POST',
-      data: data,
+      data: { prompt },
       headers: {
         'Content-Type': 'application/json'
       }
@@ -48,13 +51,15 @@ const CreatePrompt = props => {
   return (
     <Fragment>
       <div className="mt-3">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Create a prompt</label>
+        <form onSubmit={handleSubmit}>
+          <label>Change your prompt:</label>
           <input
-            placeholder='badass prompt goes here'
-            {...register('prompt.content', { required: true })} />
-          {errors.prompt && <p>Prompt is required</p>}
-          <input type="submit" />
+            placeholder="placeholder"
+            value={prompt.content}
+            name="content"
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
         </form>
       </div>
     </Fragment>
