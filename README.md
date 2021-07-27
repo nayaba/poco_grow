@@ -2,6 +2,9 @@
 
 Poco grow is a community driven journaling hub, centered around self-help and self-healing.  Join the Poco Grow community to get started using the app.  Once signed up, you can use the Poco Grow app to look through an index of inspiring journal prompts and even create some prompts of your own!  Simply click on the "Prompts" link in the navigation bar to see all user-created prompts.  Then click on "Create your own prompt" to add one of your own.  If you'd like to edit your prompt, simply click on it to open a page with "delete prompt" and "edit" options.  Happy journaling, and remember to grow little by little!
 
+### View the API:
+[View the API](https://github.com/nayaba/poco_grow_api)
+
 ### Technology Stack
 React & Django
 
