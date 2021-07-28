@@ -19,9 +19,12 @@ const UpdatePrompt = props => {
     axios(`${apiUrl}/prompt/${match.params.id}/`)
       .then(res => {
         setPrompt(res.data.prompt)
-        console.log('res in UpdatePrompt: ', res)
       })
-      .catch(console.error)
+      .catch(() => props.msgAlert({
+        heading: 'Failed to find prompt',
+        message: messages.promptShowFailure,
+        variant: 'danger'
+      }))
     return (prompt, updated, setUpdated)
   }, [])
 
@@ -29,7 +32,6 @@ const UpdatePrompt = props => {
     event.persist()
 
     setPrompt(prevPrompt => {
-      console.log(prevPrompt)
       const updatedField = { [event.target.name]: event.target.value }
       const editedPrompt = Object.assign({}, prevPrompt, updatedField)
       return editedPrompt
@@ -86,14 +88,3 @@ const UpdatePrompt = props => {
 }
 
 export default withRouter(UpdatePrompt)
-
-// Change your prompt:
-// </div>
-// <div className="mt-3 d-flex justify-content-center mt-3 col-12">
-//   <form onSubmit={handleSubmit(onSubmit)}>
-//     <input
-//       placeholder={prompt.content}
-//       {...register('prompt.content', { required: true })} />
-//     {errors.prompt && <p>Prompt is required</p>}
-//     <SolidButton type="submit" style={styles} className="ml-1">Submit</SolidButton>
-//   </form>

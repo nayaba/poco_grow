@@ -13,7 +13,6 @@ const CreatePrompt = props => {
     event.persist()
 
     setPrompt(prevPrompt => {
-      console.log(prevPrompt)
       const updatedField = { [event.target.name]: event.target.value }
       const editedPrompt = Object.assign({}, prevPrompt, updatedField)
       return editedPrompt
@@ -24,7 +23,6 @@ const CreatePrompt = props => {
     axios(`${apiUrl}/prompt/`)
       .then(res => {
         setPrompt(res.data.prompt)
-        console.log('res in CreatePrompt: ', res)
       })
       .catch(console.error)
     return (prompt, setCreatedId)

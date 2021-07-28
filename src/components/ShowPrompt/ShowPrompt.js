@@ -15,7 +15,6 @@ const ShowPrompt = (props) => {
     axios(`${apiUrl}/prompt/${match.params.id}`)
       .then(res => {
         setPrompt(res.data.prompt)
-        console.log('res in ShowPrompt: ', res)
       })
       .then()
       .then(() => props.msgAlert({
