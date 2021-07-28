@@ -4,6 +4,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import SolidButton from '../shared/SolidButton'
 import OutlineButton from '../shared/OutlineButton'
+import messages from './../AutoDismissAlert/messages'
 
 const ShowPrompt = (props) => {
   const [prompt, setPrompt] = useState([])
@@ -17,7 +18,16 @@ const ShowPrompt = (props) => {
         console.log('res in ShowPrompt: ', res)
       })
       .then()
-      .catch(console.error)
+      .then(() => props.msgAlert({
+        heading: 'Successfully found prompt!',
+        message: messages.promptShowSuccess,
+        variant: 'success'
+      }))
+      .catch(() => props.msgAlert({
+        heading: 'Failed to find prompt',
+        message: messages.promptShowFailure,
+        variant: 'danger'
+      }))
   }, [])
 
   const destroy = () => {
@@ -27,7 +37,16 @@ const ShowPrompt = (props) => {
       method: 'DELETE'
     })
       .then(() => setDeleted(true))
-      .catch(console.error)
+      .then(() => props.msgAlert({
+        heading: 'Successfully deleted prompt!',
+        message: messages.promptDeleteSuccess,
+        variant: 'success'
+      }))
+      .catch(() => props.msgAlert({
+        heading: 'Failed to delete prompt',
+        message: messages.promptDeleteFailure,
+        variant: 'danger'
+      }))
   }
 
   if (!prompt) {

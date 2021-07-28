@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import apiUrl from '../../apiConfig'
 import axios from 'axios'
+import messages from './../AutoDismissAlert/messages'
 
 import { Link } from 'react-router-dom'
 
@@ -10,7 +11,16 @@ function IndexPrompts (props) {
   useEffect(() => {
     axios(`${apiUrl}/prompt/`)
       .then(res => setPrompts(res.data.prompt))
-      .catch('error: ', console.error)
+      .then(() => props.msgAlert({
+        heading: 'Successfully retrieved prompts!',
+        message: messages.promptIndexSuccess,
+        variant: 'success'
+      }))
+      .catch(() => props.msgAlert({
+        heading: 'Failed to retrieve prompts',
+        message: messages.promptIndexFailure,
+        variant: 'danger'
+      }))
   }, [])
 
   const promptLinks = prompts.map(prompt => (

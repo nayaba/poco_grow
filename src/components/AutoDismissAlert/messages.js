@@ -10,6 +10,8 @@ export default {
   promptCreateFailure: 'Prompt did not create successfully',
   promptShowSuccess: 'Prompt Successfully Found!',
   promptShowFailure: 'Did not find Prompt',
+  promptIndexSuccess: 'Prompts Successfully Found!',
+  promptIndexFailure: 'Did not find Prompts',
   promptDeleteSuccess: 'Prompt has been deleted!',
   promptDeleteFailure: 'Prompt not deleted',
   promptUpdateSuccess: 'Prompt Updated Successfully',

@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from './../AutoDismissAlert/messages'
 // import SolidButton from '../shared/SolidButton'
 
 const UpdatePrompt = props => {
@@ -48,10 +49,17 @@ const UpdatePrompt = props => {
     })
       .then(() => {
         setUpdated(true)
-        console.log('prompt after axios: ', prompt)
-        console.log('setUpdated after axios: ', setUpdated)
       })
-      .catch(console.error)
+      .then(() => props.msgAlert({
+        heading: 'Successfully updated prompt!',
+        message: messages.promptUpdateSuccess,
+        variant: 'success'
+      }))
+      .catch(() => props.msgAlert({
+        heading: 'Failed to update prompt',
+        message: messages.promptUpdateFailure,
+        variant: 'danger'
+      }))
   }
 
   if (updated) {

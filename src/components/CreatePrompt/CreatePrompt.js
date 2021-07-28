@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from './../AutoDismissAlert/messages'
 
 const CreatePrompt = props => {
   const [prompt, setPrompt] = useState({ content: '' })
@@ -40,7 +41,16 @@ const CreatePrompt = props => {
       }
     })
       .then(res => setCreatedId(res.data.id))
-      .catch(console.error)
+      .then(() => props.msgAlert({
+        heading: 'Successfully created a new prompt!',
+        message: messages.promptCreateSuccess,
+        variant: 'success'
+      }))
+      .catch(() => props.msgAlert({
+        heading: 'Failed to create a new prompt',
+        message: messages.promptCreateFailure,
+        variant: 'danger'
+      }))
   }
 
   if (createdId) {
