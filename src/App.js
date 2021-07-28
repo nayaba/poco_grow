@@ -66,17 +66,17 @@ class App extends Component {
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
 
-          <Route exact path='/prompt' render={() => (
-            <IndexPrompts msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route user={user} exact path='/prompt' render={() => (
+            <IndexPrompts msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
-          <Route exact path='/prompt/:id' render={() => (
-            <ShowPrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route user={user} exact path='/prompt/:id' render={() => (
+            <ShowPrompt msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
-          <Route exact path='/prompt/:id/edit' render={() => (
-            <UpdatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route user={user} exact path='/prompt/:id/edit' render={() => (
+            <UpdatePrompt msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
-          <Route exact path='/create-prompt' render={() => (
-            <CreatePrompt msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route user={user} exact path='/create-prompt' render={() => (
+            <CreatePrompt msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
 
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (

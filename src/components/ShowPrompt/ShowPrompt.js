@@ -11,8 +11,14 @@ const ShowPrompt = (props) => {
   const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
-    const { match } = props
-    axios(`${apiUrl}/prompt/${match.params.id}`)
+    const { match, user } = props
+    console.log('user: ', user)
+    axios({
+      url: `${apiUrl}/prompt/${match.params.id}`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
+    })
       .then(res => {
         setPrompt(res.data.prompt)
       })
