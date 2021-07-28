@@ -12,7 +12,6 @@ const ShowPrompt = (props) => {
 
   useEffect(() => {
     const { match, user } = props
-    console.log('user: ', user)
     axios({
       url: `${apiUrl}/prompt/${match.params.id}`,
       headers: {
@@ -36,10 +35,13 @@ const ShowPrompt = (props) => {
   }, [])
 
   const destroy = () => {
-    const { match } = props
+    const { match, user } = props
     axios({
       url: `${apiUrl}/prompt/${match.params.id}`,
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
     })
       .then(() => setDeleted(true))
       .then(() => props.msgAlert({

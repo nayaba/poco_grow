@@ -15,8 +15,14 @@ const UpdatePrompt = props => {
   // }
 
   useEffect(() => {
-    const { match } = props
-    axios(`${apiUrl}/prompt/${match.params.id}/`)
+    const { match, user } = props
+    axios({
+      url: `${apiUrl}/prompt/${match.params.id}/`,
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
+    })
       .then(res => {
         setPrompt(res.data.prompt)
       })
@@ -40,13 +46,14 @@ const UpdatePrompt = props => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const { match } = props
+    const { match, user } = props
     axios({
       url: `${apiUrl}/prompt/${match.params.id}/`,
       method: 'PATCH',
       data: { prompt },
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${user.token}`
       }
     })
       .then(() => {

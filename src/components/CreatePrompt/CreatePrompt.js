@@ -20,7 +20,13 @@ const CreatePrompt = props => {
   }
 
   useEffect(() => {
-    axios(`${apiUrl}/prompt/`)
+    const { user } = props
+    axios({
+      url: `${apiUrl}/prompt/`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
+    })
       .then(res => {
         setPrompt(res.data.prompt)
       })
@@ -30,12 +36,14 @@ const CreatePrompt = props => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const { user } = props
     axios({
       url: `${apiUrl}/prompt/`,
       method: 'POST',
       data: { prompt },
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${user.token}`
       }
     })
       .then(res => setCreatedId(res.data.id))
