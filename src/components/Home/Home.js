@@ -1,6 +1,6 @@
 import React from 'react'
 import SolidButton from '../shared/SolidButton'
-import OutlineButton from '../shared/OutlineButton'
+// import OutlineButton from '../shared/OutlineButton'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
@@ -37,13 +37,6 @@ const Home = () => {
               secondaryColor='White'
             >Start Journaling</SolidButton>
           </Link>
-          <Link to='/sign-up'>
-            <OutlineButton
-              primaryColor='#ffafcc'
-              secondaryColor='White'
-              className="ml-1"
-            >Sign Up</OutlineButton>
-          </Link>
         </div>
       </div>
     </div>
@@ -51,3 +44,12 @@ const Home = () => {
 }
 
 export default Home
+
+// // Sign up Button
+// <Link to='/sign-in'>
+//   <OutlineButton
+//     primaryColor='#ffafcc'
+//     secondaryColor='White'
+//     className="ml-1"
+//   >Sign In</OutlineButton>
+// </Link>
