@@ -16,6 +16,7 @@ React & Django
 
 ### Unsolved Issues
 - Would like to implement react-hooks-forms but thus far am unable to successfully deploy using them
+- If a prompt is clicked on, but not owned by the signed in user, one is still redirected to the edit/delete page but no prompt shows up
 
 ### Planning, Process, and Problem-Solving Strategy
 When planning this app I knew I wanted to create a community-driven hub for self-help with a focus on personal, hand written journaling as the primary tool.  As you'll notice with the user stories down below, I have a big vision for this app, so the first, and I think biggest hurdle for me to overcome was determining a **true** minimum viable product.  I had to cut a lot away in order to get started!
