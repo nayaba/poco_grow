@@ -34,7 +34,7 @@ const Home = () => {
         <div className="mt-3">
           <Link to='/prompt'>
             <SolidButton
-              secondaryColor='White'
+              secondarycolor='White'
             >Start Journaling</SolidButton>
           </Link>
         </div>

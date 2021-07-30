@@ -8,6 +8,7 @@ import messages from './../AutoDismissAlert/messages'
 
 const ShowPrompt = (props) => {
   const [prompt, setPrompt] = useState([])
+  const [found, setFound] = useState(true)
   const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
@@ -27,11 +28,18 @@ const ShowPrompt = (props) => {
         message: messages.promptShowSuccess,
         variant: 'success'
       }))
-      .catch(() => props.msgAlert({
-        heading: 'Failed to find prompt',
-        message: messages.promptShowFailure,
-        variant: 'danger'
-      }))
+      .catch(() => {
+        if (prompt.length === 0) {
+          setFound(false)
+          props.msgAlert({
+            heading: 'Failed to find prompt',
+            message: messages.promptShowFailure,
+            variant: 'danger'
+          })
+        } else {
+
+        }
+      })
   }, [])
 
   const destroy = () => {
@@ -56,12 +64,12 @@ const ShowPrompt = (props) => {
       }))
   }
 
-  if (!prompt) {
-    return <p>Loading...</p>
-  }
+  // if (prompt.length === 0) {
+  //   return <p>Loading...</p>
+  // }
 
   // { pathname: '/prompts', state: { msg: 'Prompt successfully deleted!' } }
-  if (deleted) {
+  if (deleted || !found) {
     return <Redirect to='/prompt'/>
   }
 
@@ -79,8 +87,8 @@ const ShowPrompt = (props) => {
         >Delete Prompt</SolidButton>
         <Link to={`/prompt/${props.match.params.id}/edit`}>
           <OutlineButton
-            primaryColor='#ffafcc'
-            secondaryColor='White'
+            primarycolor='#ffafcc'
+            secondarycolor='White'
             className="ml-1"
           >Edit</OutlineButton>
         </Link>
